@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Nova Calculadora</h1>
+  
+  <p>Digite o número:</p>
+  <input type="text">
+  
+  
+  <p>Escolha um operador</p>
+  <div class="operators">
+  <select name="operators">
+    <option value="+">(+) Soma</option>
+    <option value="-">(-) Subtração</option>
+    <option value="x">(x) Multiplicação</option>
+    <option value="÷">(÷) Divisão</option>
+  </select>
+  </div>
+  
+  <button onclick="enter()">Enter</button>
+  <button onclick="result()">Igual =</button>
+  <p class="total"></p>
+
+  <script>
+    let numbers = []
+    function getValue(){
+      return document.querySelector('input[type="text"]').value
+    }
+    function clearValue(){
+      return document.querySelector('input[type="text"]').value = '' 
+    }
+    function enter(){
+      numbers.push(+(getValue()))
+      alert('Valid Input')
+      clearValue()
+      } 
+    }
+    function getOperator(){
+      const arrayOfOperators = document.querySelectorAll('select[name="operators"] option')
+      let selectedOperator
+      arrayOfOperators.forEach(op => op.selected ? selectedOperator = op.value : selectedOperator)
+      return selectedOperator
+    }
+    const operators = {
+      '+': (number1, number2) => number1 + number2,
+      '-': (number1, number2) => number1 - number2,
+      'x': (number1, number2) => number1 * number2,
+      '÷': (number1, number2) => number2 != 0 ? number1 / number2 : 'Error'
+    }
+    function result(){
+      const total = operators[getOperator()](numbers[0], numbers[1])
+      numbers = []
+      return document.querySelector('.total').innerHTML = `Resultado: ${total}`
+
+    }
+  </script>
+</body>
+</html>
