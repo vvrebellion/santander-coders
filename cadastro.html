@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+</head>
+<body>
+  <h2>Cadastro</h2>
+  <form>
+    <input type="text">
+    <button type="submit">OK</button>
+  </form>
+  <section>
+    <h3>Lista de usuários</h3>
+    <ul>
+
+    </ul>
+    
+  </section>
+  
+  <script>
+    function getInput(){ 
+      return document.querySelector('input[type="text"]') 
+    }
+
+    const form = document.querySelector('form')
+
+    const submitButton = document.querySelector('button[type="submit"]')
+
+    form.addEventListener( 'submit', (event) => event.preventDefault())
+
+    submitButton.onclick = () => {
+      createUser(getInput().value)
+      clearInput()
+    }
+
+    function createUser(username){
+      const userList = document.querySelector('ul')
+      const user = document.createElement('li')
+      user.innerText = username + ' '
+      userList.appendChild(user)
+      makeRemoveButton(user)
+    }
+
+    function makeRemoveButton(user){
+      const removeButton = document.createElement('button')
+      removeButton.innerText = "Remove"
+      removeButton.onclick = () => user.remove()
+      user.appendChild(removeButton)
+    }
+
+    function clearInput(){
+      return form.reset()
+    }
+  </script>
+</body>
+</html>
